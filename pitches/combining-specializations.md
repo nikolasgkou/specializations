@@ -2,7 +2,7 @@
 
 You can complete **two** specializations — but the timing only works one way:
 
-> **To do two, you must start your first branch in Wave 1 (18 June).** Starting in September leaves no room for a second one. Tell your mentors your two top choices by **Tuesday 16 June**.
+> **To do two, you must start your first branch in Wave 1 (18 June).** Starting in September leaves no room for a second one. Email your two top choices by **Tuesday 16 June**.
 
 **Any two branches can be combined.** A second branch goes *faster* when it shares tools and skills with your first — you reuse what you already learned instead of starting from zero. The matrix below shows how much skill overlap each pair has. More overlap means a quicker, smoother second branch — **not** that a combination is better or worse. Pick by interest first; use the matrix to know what to expect.
 
