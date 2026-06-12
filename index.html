@@ -19,7 +19,7 @@
       theme: {
         extend: {
           colors: {
-            brand: { 50:'#eef2ff',100:'#e0e7ff',500:'#6366f1',600:'#4f46e5',700:'#4338ca' },
+            brand: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca' },
           },
           fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
         },
@@ -31,19 +31,26 @@
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+    :focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; border-radius: .375rem; }
+  </style>
 </head>
 
 <body class="min-h-screen bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200">
 
-  <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
-    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+  <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
       <a href="./index.html" class="flex items-center gap-2 font-semibold">
-        <span class="text-xl">🎓</span>
-        <span>Zone01 Athens · Specializations</span>
+        <span aria-hidden="true" class="text-xl">🎓</span>
+        <span>Zone01 Athens <span class="text-slate-400 dark:text-slate-600">·</span> Specializations</span>
       </a>
-      <button id="theme-toggle" aria-label="Toggle dark mode"
-        class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+      <button id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false"
+        class="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 dark:hover:bg-slate-800">
         <svg class="hidden h-5 w-5 dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36 6.36-1.42-1.42M7.06 7.06 5.64 5.64m12.72 0-1.42 1.42M7.06 16.94l-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
         <svg class="block h-5 w-5 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
       </button>
@@ -52,120 +59,157 @@
 
   <main>
     <!-- Hero -->
-    <section class="mx-auto max-w-5xl px-4 pt-20 pb-10 text-center">
-      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Choose your specialization</h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-        Seven branches. Explore what you'll build in each, then email us
-        your two top choices.
-      </p>
+    <section class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800">
+      <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-brand-50/80 to-transparent dark:from-brand-700/10"></div>
+      <div class="mx-auto max-w-3xl px-4 pt-20 pb-16 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-300">
+          <span aria-hidden="true">🎓</span> Seven specialization branches
+        </span>
+        <h1 class="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">Choose your specialization</h1>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          Explore what you'll build in each branch, then email us your two top choices.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="#branches" class="rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+            Explore the branches ↓
+          </a>
+          <a href="#register" class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold transition hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+            How to register
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Key dates -->
-    <section class="mx-auto max-w-5xl px-4">
-      <div class="grid gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-4 dark:border-slate-800 dark:bg-slate-900/50">
-        <div>
-          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 1</div>
+    <section class="mx-auto max-w-5xl px-4 pt-12">
+      <div class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-4 dark:border-slate-800 dark:bg-slate-800">
+        <div class="bg-white p-5 dark:bg-slate-900/40">
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 1 starts</div>
           <div class="mt-1 font-semibold">18 June 2026</div>
         </div>
-        <div>
-          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 2</div>
+        <div class="bg-white p-5 dark:bg-slate-900/40">
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 2 starts</div>
           <div class="mt-1 font-semibold">1 September 2026</div>
         </div>
-        <div>
+        <div class="bg-white p-5 dark:bg-slate-900/40">
           <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Email choices by</div>
-          <div class="mt-1 font-semibold">Tuesday 16 June</div>
+          <div class="mt-1 font-semibold text-brand-600 dark:text-brand-400">Tuesday 16 June</div>
         </div>
-        <div>
-          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Min. to run a piscine</div>
+        <div class="bg-white p-5 dark:bg-slate-900/40">
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Min. per piscine</div>
           <div class="mt-1 font-semibold">6 participants</div>
         </div>
       </div>
       <p class="mt-3 text-center text-sm text-slate-500">
         Every student can take part, regardless of where you are in the Rust curriculum.
-        <a href="./pitch.html?b=00-key-dates" class="text-brand-600 hover:underline dark:text-brand-500">Full dates &amp; sign-up →</a>
+        <a href="./pitch.html?b=00-key-dates" class="font-medium text-brand-600 hover:underline dark:text-brand-400">Full dates &amp; sign-up →</a>
       </p>
     </section>
 
-    <!-- How to register -->
-    <section class="mx-auto max-w-5xl px-4 pt-6">
-      <div class="flex flex-col items-center gap-4 rounded-2xl border border-brand-100 bg-brand-50 p-8 text-center dark:border-brand-700/40 dark:bg-brand-700/10 sm:flex-row sm:justify-between sm:text-left">
+    <!-- Branch grid -->
+    <section id="branches" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-16">
+      <div class="mb-8 flex items-end justify-between gap-4">
         <div>
-          <h2 class="text-lg font-semibold">Ready to register your choices?</h2>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            Email us your two top specialization choices and whether you're joining Wave 1 — we'll take it from there.
+          <h2 class="text-2xl font-bold tracking-tight">The seven branches</h2>
+          <p class="mt-1 text-sm text-slate-500">Each runs as its own piscine and project track. Open one to see the full journey.</p>
+        </div>
+      </div>
+      <div id="branch-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- How to register -->
+    <section id="register" class="mx-auto max-w-6xl scroll-mt-20 px-4 pt-16">
+      <div class="flex flex-col items-start gap-5 rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-8 dark:border-brand-700/40 dark:from-brand-700/15 dark:to-slate-950 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="text-xl font-bold">Ready to register your choices?</h2>
+          <p class="mt-2 max-w-xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Email us your two top specialization choices and whether you're joining Wave 1 — the message opens pre-filled, so you just fill in the blanks and send.
           </p>
         </div>
         <a href="mailto:contact@zone01.gr?subject=Specialization%20choices&amp;body=Hi%2C%0A%0AI%20would%20like%20to%20register%20my%20specialization%20choices.%0A%0AMy%20two%20top%20choices%3A%0A1.%20%0A2.%20%0A%0AJoining%20Wave%201%20(18%20June)%3A%20yes%20%2F%20no%0A%0AFirst%20Name%3A%20%0ALast%20Name%3A%20%0ALogin%3A%20"
-           class="shrink-0 rounded-lg bg-brand-600 px-6 py-3 font-medium text-white transition hover:bg-brand-700">
-          Email your choices →
+           class="inline-flex shrink-0 items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-brand-700">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M3 8v8a2 2 0 002 2h14a2 2 0 002-2V8M3 8l9-4 9 4"/></svg>
+          Email your choices
         </a>
       </div>
     </section>
 
-    <!-- Branch grid -->
-    <section class="mx-auto max-w-5xl px-4 py-16">
-      <div id="branch-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
-    </section>
-
     <!-- Combining -->
-    <section class="border-t border-slate-200 dark:border-slate-800">
-      <div class="mx-auto max-w-5xl px-4 py-16">
-        <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8 dark:border-brand-700/40 dark:bg-brand-700/10">
-          <h2 class="text-2xl font-bold">Thinking about two branches?</h2>
-          <p class="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">
-            You can complete two specializations — but only if you start your first in Wave 1
-            (18 June). Some pairs share tools and skills, so the second branch goes faster.
-          </p>
-          <a href="./pitch.html?b=combining-specializations"
-            class="mt-6 inline-block rounded-lg bg-brand-600 px-6 py-3 font-medium text-white transition hover:bg-brand-700">
-            See the overlap matrix →
-          </a>
-        </div>
+    <section class="mx-auto max-w-6xl px-4 py-16">
+      <div class="rounded-2xl border border-slate-200 p-8 dark:border-slate-800">
+        <h2 class="text-xl font-bold">Thinking about two branches?</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          You can complete two specializations — but only if you start your first in Wave 1
+          (18 June). Some pairs share tools and skills, so the second branch goes faster.
+        </p>
+        <a href="./pitch.html?b=combining-specializations"
+          class="mt-5 inline-flex items-center gap-1 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold transition hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900">
+          See the overlap matrix →
+        </a>
       </div>
     </section>
   </main>
 
   <footer class="border-t border-slate-200 dark:border-slate-800">
-    <div class="mx-auto max-w-5xl px-4 py-10 text-sm text-slate-500">
-      © <span id="year"></span> Zone01 Athens. Specialization branches.
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-10 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <span>© <span id="year"></span> Zone01 Athens · Specialization branches</span>
+      <span class="flex gap-5">
+        <a href="./pitch.html?b=00-key-dates" class="hover:text-brand-600 dark:hover:text-brand-400">Key dates</a>
+        <a href="./pitch.html?b=combining-specializations" class="hover:text-brand-600 dark:hover:text-brand-400">Combining branches</a>
+        <a href="#register" class="hover:text-brand-600 dark:hover:text-brand-400">Register</a>
+      </span>
     </div>
   </footer>
 
   <script>
-    // Single source of truth — every card uses the identical template.
+    // Single source of truth — every card uses the identical template (no branch is styled differently).
     const BRANCHES = [
       { slug:'artificial-intelligence', emoji:'🧠', name:'Artificial Intelligence',
-        blurb:'Machine learning, deep learning, NLP and computer vision — from raw data to deployed dashboards.' },
+        blurb:'Machine learning, deep learning, NLP and computer vision — from raw data to deployed dashboards.',
+        format:'Piscine + 9 projects', split:'4 solo · 5 team' },
       { slug:'blockchain-crypto', emoji:'🔗', name:'Blockchain & Crypto',
-        blurb:'Smart contracts, tokens and on-chain systems with Solidity and Ethereum.' },
+        blurb:'Smart contracts, tokens and on-chain systems with Solidity and Ethereum.',
+        format:'Piscine + 4 projects', split:'4 solo' },
       { slug:'cloud-devops', emoji:'💽', name:'Cloud DevOps',
-        blurb:'Networks, servers, containers, Kubernetes and cloud automation.' },
+        blurb:'Networks, servers, containers, Kubernetes and cloud automation.',
+        format:'Piscine + 7 projects', split:'3 solo · 4 team' },
       { slug:'cybersecurity', emoji:'🔐', name:'Cybersecurity',
-        blurb:'Offensive security — pentesting, reverse engineering and web exploitation.' },
+        blurb:'Offensive security — pentesting, reverse engineering and web exploitation.',
+        format:'10 projects · no piscine', split:'10 solo' },
       { slug:'java-fullstack', emoji:'🧑‍💻', name:'Java Full-Stack',
-        blurb:'Spring Boot backends, Angular frontends and a full DevOps toolchain.' },
+        blurb:'Spring Boot backends, Angular frontends and a full DevOps toolchain.',
+        format:'Piscine + 12 projects', split:'3 solo · 9 team' },
       { slug:'mobile-applications', emoji:'📲', name:'Mobile Applications',
-        blurb:'Responsive iOS and Android apps with Dart and Flutter.' },
+        blurb:'Responsive iOS and Android apps with Dart and Flutter.',
+        format:'Piscine + 6 projects', split:'6 team' },
       { slug:'video-games', emoji:'🎮', name:'Video Games',
-        blurb:'Gameplay programming in Unreal Engine 5 with Blueprints and C++.' },
+        blurb:'Gameplay programming in Unreal Engine 5 with Blueprints and C++.',
+        format:'10 projects · no piscine', split:'5 solo · 5 team' },
     ];
 
-    const grid = document.getElementById('branch-grid');
-    grid.innerHTML = BRANCHES.map(b => `
+    const chip = t => `<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">${t}</span>`;
+    document.getElementById('branch-grid').innerHTML = BRANCHES.map(b => `
       <a href="./pitch.html?b=${b.slug}"
-         class="group flex flex-col rounded-xl border border-slate-200 p-6 transition hover:border-brand-400 hover:shadow-md dark:border-slate-800 dark:hover:border-brand-500">
-        <div class="text-3xl">${b.emoji}</div>
-        <h3 class="mt-4 text-lg font-semibold">${b.name}</h3>
-        <p class="mt-2 flex-1 text-sm text-slate-600 dark:text-slate-400">${b.blurb}</p>
-        <span class="mt-4 text-sm font-medium text-brand-600 group-hover:underline dark:text-brand-500">
-          Explore branch →
+         class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-brand-500">
+        <div class="flex items-center gap-3">
+          <span aria-hidden="true" class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-2xl dark:bg-brand-700/15">${b.emoji}</span>
+          <h3 class="text-lg font-semibold leading-tight">${b.name}</h3>
+        </div>
+        <p class="mt-4 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">${b.blurb}</p>
+        <div class="mt-5 flex flex-wrap gap-2">${chip(b.format)}${chip(b.split)}</div>
+        <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 dark:text-brand-400">
+          Explore branch <span class="transition-transform group-hover:translate-x-0.5">→</span>
         </span>
       </a>`).join('');
 
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const root = document.documentElement;
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+    const syncPressed = () => toggle.setAttribute('aria-pressed', root.classList.contains('dark'));
+    syncPressed();
+    toggle.addEventListener('click', () => {
       root.classList.toggle('dark');
       localStorage.theme = root.classList.contains('dark') ? 'dark' : 'light';
+      syncPressed();
     });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>

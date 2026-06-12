@@ -12,7 +12,7 @@
     tailwind.config = {
       darkMode: 'class',
       theme: { extend: {
-        colors: { brand: { 50:'#eef2ff',100:'#e0e7ff',500:'#6366f1',600:'#4f46e5',700:'#4338ca' } },
+        colors: { brand: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca' } },
         fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
       } },
     };
@@ -24,18 +24,36 @@
   <!-- Markdown renderer -->
   <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+    :focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; border-radius: .375rem; }
+    /* Clean, readable tables inside the rendered markdown */
+    .prose table { width: 100%; margin: 0; border-collapse: collapse; font-size: .875rem; }
+    .prose thead th { background: #f8fafc; text-align: left; font-weight: 600; white-space: nowrap; }
+    .dark .prose thead th { background: rgb(30 41 59 / .6); }
+    .prose th, .prose td { padding: .55rem .8rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .dark .prose th, .dark .prose td { border-color: rgb(30 41 59); }
+    .prose tbody tr:last-child td { border-bottom: 0; }
+    .prose tbody tr:hover td { background: rgb(99 102 241 / .04); }
+    /* The intro line under each H1 (e.g. "Specialization branch · Zone01 Athens") */
+    .prose h1 + p strong { font-weight: 500; color: #64748b; }
+    .dark .prose h1 + p strong { color: #94a3b8; }
+  </style>
 </head>
 
 <body class="min-h-screen bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200">
 
-  <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
-    <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-      <a href="./index.html" class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-500">
-        <span>←</span><span>All specializations</span>
+  <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-3.5">
+      <a href="./index.html" class="flex items-center gap-1.5 text-sm font-medium text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">
+        <span aria-hidden="true">←</span><span>All specializations</span>
       </a>
-      <button id="theme-toggle" aria-label="Toggle dark mode"
-        class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+      <button id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false"
+        class="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 dark:hover:bg-slate-800">
         <svg class="hidden h-5 w-5 dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36 6.36-1.42-1.42M7.06 7.06 5.64 5.64m12.72 0-1.42 1.42M7.06 16.94l-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
         <svg class="block h-5 w-5 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
       </button>
@@ -43,35 +61,67 @@
   </header>
 
   <main class="mx-auto max-w-3xl px-4 py-12">
-    <article id="content"
+    <article id="content" aria-live="polite" aria-busy="true"
       class="prose prose-slate max-w-none dark:prose-invert
-             prose-headings:scroll-mt-24 prose-a:text-brand-600 dark:prose-a:text-brand-500
-             prose-table:text-sm prose-th:text-left">
-      <p class="text-slate-500">Loading…</p>
+             prose-headings:scroll-mt-24 prose-headings:tracking-tight
+             prose-h1:mb-2 prose-h2:mt-10 prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-2 dark:prose-h2:border-slate-800
+             prose-a:font-medium prose-a:text-brand-600 dark:prose-a:text-brand-400
+             prose-li:my-1 prose-hr:border-slate-200 dark:prose-hr:border-slate-800">
+      <p class="animate-pulse text-slate-400">Loading…</p>
     </article>
+
+    <!-- Prev / next branch navigation (branches only) -->
+    <nav id="pager" class="mt-12"></nav>
   </main>
 
   <footer class="border-t border-slate-200 dark:border-slate-800">
     <div class="mx-auto max-w-3xl px-4 py-10 text-sm text-slate-500">
-      <a href="./index.html" class="text-brand-600 hover:underline dark:text-brand-500">← Back to all specializations</a>
+      <a href="./index.html" class="font-medium text-brand-600 hover:underline dark:text-brand-400">← Back to all specializations</a>
     </div>
   </footer>
 
-  <script>
-    // Whitelist of valid documents — prevents arbitrary path access via the query string.
-    const DOCS = new Set([
-      '00-key-dates', 'artificial-intelligence', 'blockchain-crypto', 'cloud-devops',
-      'combining-specializations', 'cybersecurity', 'java-fullstack',
-      'mobile-applications', 'video-games',
-    ]);
+  <!-- Back to top -->
+  <button id="to-top" aria-label="Back to top"
+    class="fixed bottom-6 right-6 z-30 hidden rounded-full border border-slate-200 bg-white/90 p-3 text-slate-600 shadow-lg backdrop-blur transition hover:text-brand-600 dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-300">
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+  </button>
 
-    const params = new URLSearchParams(location.search);
-    const slug = params.get('b');
+  <script>
+    // Ordered branch list — drives the whitelist and prev/next navigation. Same order as the landing grid.
+    const ORDER = [
+      { slug:'artificial-intelligence', emoji:'🧠', name:'Artificial Intelligence' },
+      { slug:'blockchain-crypto', emoji:'🔗', name:'Blockchain & Crypto' },
+      { slug:'cloud-devops', emoji:'💽', name:'Cloud DevOps' },
+      { slug:'cybersecurity', emoji:'🔐', name:'Cybersecurity' },
+      { slug:'java-fullstack', emoji:'🧑‍💻', name:'Java Full-Stack' },
+      { slug:'mobile-applications', emoji:'📲', name:'Mobile Applications' },
+      { slug:'video-games', emoji:'🎮', name:'Video Games' },
+    ];
+    // Whitelist (branches + the two info docs) — prevents arbitrary path access via the query string.
+    const DOCS = new Set([...ORDER.map(o => o.slug), '00-key-dates', 'combining-specializations']);
+
+    const slug = new URLSearchParams(location.search).get('b');
     const el = document.getElementById('content');
+    const pager = document.getElementById('pager');
+
+    function renderPager() {
+      const i = ORDER.findIndex(o => o.slug === slug);
+      if (i === -1) return;
+      const prev = ORDER[(i - 1 + ORDER.length) % ORDER.length];
+      const next = ORDER[(i + 1) % ORDER.length];
+      const card = (b, dir) => `
+        <a href="./pitch.html?b=${b.slug}"
+           class="group flex flex-col gap-1 rounded-xl border border-slate-200 p-4 transition hover:border-brand-300 hover:bg-slate-50 dark:border-slate-800 dark:hover:border-brand-500 dark:hover:bg-slate-900/50 ${dir==='next'?'text-right items-end':''}">
+          <span class="text-xs font-medium uppercase tracking-wide text-slate-400">${dir==='prev'?'← Previous':'Next →'}</span>
+          <span class="font-semibold"><span aria-hidden="true">${b.emoji}</span> ${b.name}</span>
+        </a>`;
+      pager.innerHTML = `<div class="grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 dark:border-slate-800">${card(prev,'prev')}${card(next,'next')}</div>`;
+    }
 
     async function render() {
       if (!slug || !DOCS.has(slug)) {
         el.innerHTML = '<h1>Branch not found</h1><p>Pick one from the <a href="./index.html">list of specializations</a>.</p>';
+        el.setAttribute('aria-busy', 'false');
         return;
       }
       try {
@@ -80,22 +130,39 @@
         const md = await res.text();
         document.title = (md.match(/^#\s+(.+)$/m)?.[1] || 'Specialization') + ' — Zone01 Athens';
         el.innerHTML = marked.parse(md, { gfm: true });
-        // External links open in a new tab so the pitch stays put.
-        el.querySelectorAll('a[href^="http"]').forEach(a => {
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
+        // Wrap tables so they scroll horizontally on small screens instead of overflowing.
+        el.querySelectorAll('table').forEach(t => {
+          const wrap = document.createElement('div');
+          wrap.className = 'my-6 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800';
+          t.parentNode.insertBefore(wrap, t);
+          wrap.appendChild(t);
         });
+        // External links open in a new tab so the pitch stays put.
+        el.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_blank'; a.rel = 'noopener noreferrer'; });
+        el.setAttribute('aria-busy', 'false');
+        renderPager();
       } catch (e) {
         el.innerHTML = '<h1>Could not load this branch</h1><p>Please try again, or go back to the <a href="./index.html">list of specializations</a>.</p>';
+        el.setAttribute('aria-busy', 'false');
       }
     }
     render();
 
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const root = document.documentElement;
+    // Theme toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+    const syncPressed = () => toggle.setAttribute('aria-pressed', root.classList.contains('dark'));
+    syncPressed();
+    toggle.addEventListener('click', () => {
       root.classList.toggle('dark');
       localStorage.theme = root.classList.contains('dark') ? 'dark' : 'light';
+      syncPressed();
     });
+
+    // Back to top
+    const toTop = document.getElementById('to-top');
+    addEventListener('scroll', () => toTop.classList.toggle('hidden', scrollY < 400));
+    toTop.addEventListener('click', () => scrollTo({ top: 0 }));
   </script>
 </body>
 </html>
