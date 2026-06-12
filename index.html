@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zone01 Athens — Specialization Branches</title>
+  <meta name="description" content="The seven Zone01 Athens specialization branches, what you build in each, and how to sign up." />
+
+  <meta property="og:title" content="Zone01 Athens — Specialization Branches" />
+  <meta property="og:description" content="The seven Zone01 Athens specialization branches, what you build in each, and how to sign up." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#eef2ff',100:'#e0e7ff',500:'#6366f1',600:'#4f46e5',700:'#4338ca' },
+          },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+        },
+      },
+    };
+    if (localStorage.theme === 'dark' ||
+       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="min-h-screen bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200">
+
+  <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+      <a href="./index.html" class="flex items-center gap-2 font-semibold">
+        <span class="text-xl">🎓</span>
+        <span>Zone01 Athens · Specializations</span>
+      </a>
+      <button id="theme-toggle" aria-label="Toggle dark mode"
+        class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <svg class="hidden h-5 w-5 dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36 6.36-1.42-1.42M7.06 7.06 5.64 5.64m12.72 0-1.42 1.42M7.06 16.94l-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
+        <svg class="block h-5 w-5 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="mx-auto max-w-5xl px-4 pt-20 pb-10 text-center">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Choose your specialization</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+        Seven branches, each six months long. Explore what you'll build in each, then tell your
+        mentors your two top choices.
+      </p>
+    </section>
+
+    <!-- Key dates -->
+    <section class="mx-auto max-w-5xl px-4">
+      <div class="grid gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:grid-cols-4 dark:border-slate-800 dark:bg-slate-900/50">
+        <div>
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 1</div>
+          <div class="mt-1 font-semibold">18 June 2026</div>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Wave 2</div>
+          <div class="mt-1 font-semibold">1 September 2026</div>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Tell mentors by</div>
+          <div class="mt-1 font-semibold">Tuesday 16 June</div>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-wide text-slate-500">Min. to run a piscine</div>
+          <div class="mt-1 font-semibold">6 participants</div>
+        </div>
+      </div>
+      <p class="mt-3 text-center text-sm text-slate-500">
+        Every student can take part, regardless of where you are in the Rust curriculum.
+        <a href="./pitch.html?b=00-key-dates" class="text-brand-600 hover:underline dark:text-brand-500">Full dates &amp; sign-up →</a>
+      </p>
+    </section>
+
+    <!-- Branch grid -->
+    <section class="mx-auto max-w-5xl px-4 py-16">
+      <div id="branch-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- Combining -->
+    <section class="border-t border-slate-200 dark:border-slate-800">
+      <div class="mx-auto max-w-5xl px-4 py-16">
+        <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8 dark:border-brand-700/40 dark:bg-brand-700/10">
+          <h2 class="text-2xl font-bold">Thinking about two branches?</h2>
+          <p class="mt-3 max-w-3xl text-slate-600 dark:text-slate-300">
+            You can complete two specializations — but only if you start your first in Wave 1
+            (18 June). Some pairs share tools and skills, so the second branch goes faster.
+          </p>
+          <a href="./pitch.html?b=combining-specializations"
+            class="mt-6 inline-block rounded-lg bg-brand-600 px-6 py-3 font-medium text-white transition hover:bg-brand-700">
+            See the overlap matrix →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800">
+    <div class="mx-auto max-w-5xl px-4 py-10 text-sm text-slate-500">
+      © <span id="year"></span> Zone01 Athens. Specialization branches · 6 months each.
+    </div>
+  </footer>
+
+  <script>
+    // Single source of truth — every card uses the identical template.
+    const BRANCHES = [
+      { slug:'artificial-intelligence', emoji:'🧠', name:'Artificial Intelligence',
+        blurb:'Machine learning, deep learning, NLP and computer vision — from raw data to deployed dashboards.' },
+      { slug:'blockchain-crypto', emoji:'🔗', name:'Blockchain & Crypto',
+        blurb:'Smart contracts, tokens and on-chain systems with Solidity and Ethereum.' },
+      { slug:'cloud-devops', emoji:'💽', name:'Cloud DevOps',
+        blurb:'Networks, servers, containers, Kubernetes and cloud automation.' },
+      { slug:'cybersecurity', emoji:'🔐', name:'Cybersecurity',
+        blurb:'Offensive security — pentesting, reverse engineering and web exploitation.' },
+      { slug:'java-fullstack', emoji:'🧑‍💻', name:'Java Full-Stack',
+        blurb:'Spring Boot backends, Angular frontends and a full DevOps toolchain.' },
+      { slug:'mobile-applications', emoji:'📲', name:'Mobile Applications',
+        blurb:'Responsive iOS and Android apps with Dart and Flutter.' },
+      { slug:'video-games', emoji:'🎮', name:'Video Games',
+        blurb:'Gameplay programming in Unreal Engine 5 with Blueprints and C++.' },
+    ];
+
+    const grid = document.getElementById('branch-grid');
+    grid.innerHTML = BRANCHES.map(b => `
+      <a href="./pitch.html?b=${b.slug}"
+         class="group flex flex-col rounded-xl border border-slate-200 p-6 transition hover:border-brand-400 hover:shadow-md dark:border-slate-800 dark:hover:border-brand-500">
+        <div class="text-3xl">${b.emoji}</div>
+        <h3 class="mt-4 text-lg font-semibold">${b.name}</h3>
+        <p class="mt-2 flex-1 text-sm text-slate-600 dark:text-slate-400">${b.blurb}</p>
+        <span class="mt-4 text-sm font-medium text-brand-600 group-hover:underline dark:text-brand-500">
+          Explore branch →
+        </span>
+      </a>`).join('');
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const root = document.documentElement;
+      root.classList.toggle('dark');
+      localStorage.theme = root.classList.contains('dark') ? 'dark' : 'light';
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
