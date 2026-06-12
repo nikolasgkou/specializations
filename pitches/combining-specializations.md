@@ -1,6 +1,6 @@
 # Can I do two specializations? Combining branches
 
-Each specialization branch is **6 months**. You can complete **two** — but the timing only works one way:
+You can complete **two** specializations — but the timing only works one way:
 
 > **To do two, you must start your first branch in Wave 1 (18 June).** Starting in September leaves no room for a second one. Tell your mentors your two top choices by **Tuesday 16 June**.
 

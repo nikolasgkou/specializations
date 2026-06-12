@@ -1,5 +1,5 @@
 # 🎮 Video Games
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch explores the field of video games, using Unreal Engine 5 (Epic Games) as a foundation. Students will work on game design, game development, and game engine functioning and development.
 

@@ -1,5 +1,5 @@
 # 🧑‍💻 Java Full Stack Development
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch explores the use of Java in Full Stack Development along with the discovery of Angular, Postgres, Jenkins, MongoDB, Sonar to build scaled web applications.
 

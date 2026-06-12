@@ -1,5 +1,5 @@
 # 🔐 Cybersecurity
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch explores offensive security through hands-on practice across ten solo projects: you build penetration-testing and reconnaissance tooling, reverse-engineer binaries and live malware, and find and exploit web and system vulnerabilities inside isolated virtual machines, always for authorized, ethical use.
 

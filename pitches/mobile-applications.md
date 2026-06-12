@@ -1,5 +1,5 @@
 # 📲 Mobile Applications
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch explores the field of mobile development through Dart and Flutter. The outcome of the branch is that students can create responsive and performant mobile apps of a various complexity for both iOS and Android operating systems.
 

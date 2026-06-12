@@ -1,5 +1,5 @@
 # 🔗 Blockchain & Crypto
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch explores the field of blockchain and cryptocurrencies, taking you from transactions, cryptography and smart contracts through to deploying and operating real on-chain systems with Solidity and Ethereum.
 

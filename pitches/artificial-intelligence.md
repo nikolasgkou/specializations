@@ -1,5 +1,5 @@
 # 🧠 Artificial Intelligence
-**Specialization branch · Zone01 Athens · 6 months**
+**Specialization branch · Zone01 Athens**
 
 > This branch aims to give a solid and practical understanding of machine learning algorithms and methodologies. It gives an overview of real life use cases in finance, image processing, natural language processing...
 
